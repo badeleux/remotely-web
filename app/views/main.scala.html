@@ -1,0 +1,81 @@
+@(title: String, nav: String = "")(content: Html)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="@routes.Assets.at("stylesheets/bootstrap.css")" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="@routes.Assets.at("stylesheets/sb-admin.css")" rel="stylesheet">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/font-awesome/css/font-awesome.min.css")">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@routes.Application.index()">Pick'n'Play</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="@("active".when(nav == "dashboard"))"><a href="@routes.Application.index()"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="@("active".when(nav == "tools"))"><a href="@routes.Tools.index()"><i class="fa fa-wrench"></i> Tools</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right navbar-user">
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
+                        <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <div id="page-wrapper">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Blank Page <small>A Blank Slate</small></h1>
+                <ol class="breadcrumb">
+                    <li><a href="index.html"><i class="icon-dashboard"></i> Dashboard</a></li>
+                    <li class="active"><i class="icon-file-alt"></i> Blank Page</li>
+                </ol>
+            </div>
+        </div><!-- /.row -->
+
+    </div><!-- /#page-wrapper -->
+
+</div><!-- /#wrapper -->
+
+<!-- JavaScript -->
+<script src="@routes.Assets.at("javascripts/jquery-1.10.2.js")"></script>
+<script src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+
+</body>
+</html>
