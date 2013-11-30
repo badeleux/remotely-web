@@ -8,5 +8,9 @@ GET     /                           controllers.Application.index
 # Tools
 GET     /tools                      controllers.Tools.index
 
+# Displays
+GET	/displays		    controllers.Displays.index
+POST    /displays		    controllers.Displays.newDisplay
+POST	/displays/:id/delete	    controllers.Displays.deleteDisplay(id: Long)
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

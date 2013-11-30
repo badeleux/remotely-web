@@ -39,7 +39,9 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="@("active".when(nav == "dashboard"))"><a href="@routes.Application.index()"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+
                 <li class="@("active".when(nav == "tools"))"><a href="@routes.Tools.index()"><i class="fa fa-wrench"></i> Tools</a></li>
+                <li class="@("active".when(nav == "displays"))"><a href="@routes.Displays.index()"><i class="fa fa-laptop"></i> Displays</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right navbar-user">
@@ -61,13 +63,15 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h1>Blank Page <small>A Blank Slate</small></h1>
+                <h1>@title</h1>
                 <ol class="breadcrumb">
-                    <li><a href="index.html"><i class="icon-dashboard"></i> Dashboard</a></li>
+                    <li><a href="@routes.Application.index"><i class="icon-dashboard"></i> Dashboard</a></li>
                     <li class="active"><i class="icon-file-alt"></i> Blank Page</li>
                 </ol>
             </div>
         </div><!-- /.row -->
+
+@content
 
     </div><!-- /#page-wrapper -->
 

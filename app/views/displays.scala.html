@@ -1,0 +1,37 @@
+@(displays: List[Display], displayForm: Form[Display])
+
+@import helper._
+
+@main("Displays", "displays") {
+
+<h1>@displays.size display(s)</h1>
+<div class="table-responsive">
+	<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Address</th>
+				<th>X Application</th>
+			</tr>
+		</thead>
+		<tbody>
+			@displays.map { display =>
+			<tr>
+				<td>@display.id</td>
+				<td>@display.name</td>
+				<td>@display.ip_screen_address</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+<h2>Add a new display</h2>
+@form(routes.Displays.newDisplay) {
+	@inputText(displayForm("name"))
+	@inputText(displayForm("ip_address"))
+	<input type="submit" value="Create">
+}
+}
+
