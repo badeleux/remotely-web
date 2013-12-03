@@ -12,5 +12,6 @@ GET     /tools                      controllers.Tools.index
 GET	/displays		    controllers.Displays.index
 POST    /displays		    controllers.Displays.newDisplay
 POST	/displays/:id/delete	    controllers.Displays.deleteDisplay(id: Long)
+GET     /displays/:id/runXApp controllers.Displays.runXApp(id: Long)
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

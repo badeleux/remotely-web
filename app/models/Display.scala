@@ -4,7 +4,9 @@ import anorm._
 import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
-
+import play.api.libs.iteratee.Iteratee
+import playcli._
+import play.api.libs.concurrent.Execution.Implicits._
 
 case class Display(id: Long, name: String, ip_screen_address: String)
 
@@ -17,8 +19,11 @@ val display = {
     case id~name~ip_screen_address => Display(id, name, ip_screen_address)
   }
 }
-  def all(): List[Display] = DB.withConnection { implicit c =>
-    SQL("select * from display").as(display *)
+  def all(): List[Display] =
+  {
+      DB.withConnection { implicit c =>
+        SQL("select * from display").as(display *)
+       }
   }
   def create(name: String, ip_screen_address: String) {
     DB.withConnection { implicit c =>
@@ -31,5 +36,14 @@ val display = {
       SQL("delete fron display where id = {id}").on('id -> id).executeUpdate()
     
     }
-  }	
+  }
+
+  def runXApp(name: String) {
+
+  }
+
+  def currentlyRunningApplication() : String = {
+
+    ""
+  }
 }

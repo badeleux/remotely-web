@@ -14,22 +14,28 @@ object Displays extends Controller {
     "name" -> nonEmptyText,
     "ip_address" -> nonEmptyText
   )
-  ((name, ip_address) => 
+  ((name, ip_address) =>
     Display(1L, name, ip_address)
   )
-  ((display: Display) => 
+  ((display: Display) =>
     Option((display.name, display.ip_screen_address))
   )
   )
 
+  val runXAppForm = Form(
+    single(
+      "xApp" -> nonEmptyText
+    )
+  )
+
 
   def index = Action {
-    Ok(views.html.displays(Display.all(), displayForm))
+    Ok(views.html.displays(Display.all(), displayForm, runXAppForm))
   }
 
   def newDisplay = Action { implicit request =>
     displayForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.displays(Display.all(), errors)),
+      errors => BadRequest(views.html.displays(Display.all(), errors, runXAppForm)),
       display => {
         Display.create(display.name, display.ip_screen_address)
         Redirect(routes.Displays.index)
@@ -43,8 +49,17 @@ object Displays extends Controller {
     Redirect(routes.Displays.index)
   }
 
-  def runXApp(id: Long, xApp: String) = Action {
-    
+  def runXApp(id: Long) = Action { implicit request =>
+    runXAppForm.bindFromRequest.fold(
+      errors => BadRequest(views.html.displays(Display.all(), displayForm, errors)),
+      xAppName => {
+
+        Redirect(routes.Displays.index)
+      }
+
+    )
+
+
   }
 
 }

@@ -1,4 +1,4 @@
-@(displays: List[Display], displayForm: Form[Display])
+@(displays: List[Display], displayForm: Form[Display], runXAppForm: Form[String])
 
 @import helper._
 
@@ -21,6 +21,10 @@
 				<td>@display.id</td>
 				<td>@display.name</td>
 				<td>@display.ip_screen_address</td>
+				<td>@form(routes.Displays.runXApp(display.id)) {
+                        @inputText(runXAppForm("xApp"))
+                        <input type="submit" value="Run On">
+                    }</td>
 			</tr>
 			}
 		</tbody>
