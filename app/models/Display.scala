@@ -4,11 +4,16 @@ import anorm._
 import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
-import play.api.libs.iteratee.Iteratee
-import playcli._
 import play.api.libs.concurrent.Execution.Implicits._
+import scala.sys.process._
 
 case class Display(id: Long, name: String, ip_screen_address: String)
+{
+  def currentlyRunningApplication() : String = {
+    val cmd = Seq("pgrep", "-l", "-f", ip_screen_address)
+
+  }
+}
 
 object Display {
 
@@ -40,10 +45,5 @@ val display = {
 
   def runXApp(name: String) {
 
-  }
-
-  def currentlyRunningApplication() : String = {
-
-    ""
   }
 }
