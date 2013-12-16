@@ -21,27 +21,31 @@ object Displays extends Controller {
     Option((display.name, display.ip_screen_address))
   )
   )
-
-  val runXAppForm = Form(
-    single(
-      "xApp" -> nonEmptyText
-    )
-  )
+  
+  def xAppForms(displays: List[Display]) : List[Form[String]] = 
+  {
+     displays.map(d => {
+     Form(
+        single(
+         "xApp" -> nonEmptyText
+        )
+      ).fill(d.currentlyRunningApplication())
+    })
+  }
 
 
   def index = Action {
-    Ok(views.html.displays(Display.all(), displayForm, runXAppForm))
+       Ok(views.html.displays(Display.all(), displayForm, xAppForms(Display.all())))
   }
 
   def newDisplay = Action { implicit request =>
     displayForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.displays(Display.all(), errors, runXAppForm)),
+      errors => BadRequest(views.html.displays(Display.all(), errors, xAppForms(Display.all()))),
       display => {
         Display.create(display.name, display.ip_screen_address)
         Redirect(routes.Displays.index)
       }
     )
-    
   }
 
   def deleteDisplay(id: Long) = Action { 
@@ -49,17 +53,18 @@ object Displays extends Controller {
     Redirect(routes.Displays.index)
   }
 
-  def runXApp(id: Long) = Action { implicit request =>
+  def runXApp(id: Long) = Action { implicit request => {
+    val forms = xAppForms(Display.all())
+    val runXAppForm = forms(id.toInt-1)
     runXAppForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.displays(Display.all(), displayForm, errors)),
+      errors => BadRequest(views.html.displays(Display.all(), displayForm, forms.map{form => if(runXAppForm == form) errors else form})),
       xAppName => {
-
         Redirect(routes.Displays.index)
       }
 
     )
 
-
+    }
   }
 
 }

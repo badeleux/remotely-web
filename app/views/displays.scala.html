@@ -1,5 +1,6 @@
-@(displays: List[Display], displayForm: Form[Display], runXAppForm: Form[String])
+@(displays: List[Display], displayForm: Form[Display], runXAppForms: List[Form[String]])
 
+@import helper.twitterBootstrap._
 @import helper._
 
 @main("Displays", "displays") {
@@ -22,7 +23,7 @@
 				<td>@display.name</td>
 				<td>@display.ip_screen_address</td>
 				<td>@form(routes.Displays.runXApp(display.id)) {
-                        @inputText(runXAppForm("xApp"))
+					@inputText(runXAppForms(displays.indexOf(display))("xApp"), args = '_value -> "Name")
                         <input type="submit" value="Run On">
                     }</td>
 			</tr>

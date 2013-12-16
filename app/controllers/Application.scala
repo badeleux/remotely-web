@@ -12,10 +12,6 @@ import scala.sys.process._
 object Application extends Controller {
 
   def index = Action {
-
-    val cmd = Seq("pgrep", "-l", "-f", "192.168.0.1")
-    print (cmd lines)
     Ok(views.html.index("Your new application is ready."))
   }
-
 }

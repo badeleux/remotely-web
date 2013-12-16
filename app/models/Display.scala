@@ -9,11 +9,14 @@ import scala.sys.process._
 
 case class Display(id: Long, name: String, ip_screen_address: String)
 {
+
   def currentlyRunningApplication() : String = {
     val cmd = Seq("pgrep", "-l", "-f", ip_screen_address)
-
+    cmd.lines.head.split(" ")(1)
   }
+
 }
+
 
 object Display {
 
@@ -42,6 +45,9 @@ val display = {
     
     }
   }
+ 
+
+
 
   def runXApp(name: String) {
 
