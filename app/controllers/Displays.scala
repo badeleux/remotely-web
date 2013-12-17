@@ -7,7 +7,7 @@ import play.api.data.Forms._
 import models.Display
 
 
-object Displays extends Controller {
+object Displays extends Controller with Secured {
   
   val displayForm = Form(
   mapping(
@@ -34,11 +34,11 @@ object Displays extends Controller {
   }
 
 
-  def index = Action {
+  def index = withAuth { username => implicit request =>
        Ok(views.html.displays(Display.all(), displayForm, xAppForms(Display.all())))
   }
 
-  def newDisplay = Action { implicit request =>
+  def newDisplay = withAuth { username => implicit request =>
     displayForm.bindFromRequest.fold(
       errors => BadRequest(views.html.displays(Display.all(), errors, xAppForms(Display.all()))),
       display => {
@@ -48,12 +48,12 @@ object Displays extends Controller {
     )
   }
 
-  def deleteDisplay(id: Long) = Action { 
+  def deleteDisplay(id: Long) = withAuth { username => implicit request =>
     Display.delete(id)
     Redirect(routes.Displays.index)
   }
 
-  def runXApp(id: Long) = Action { implicit request => {
+  def runXApp(id: Long) = withAuth { username => implicit request => {
     val forms = xAppForms(Display.all())
     val runXAppForm = forms(id.toInt-1)
     runXAppForm.bindFromRequest.fold(
@@ -63,7 +63,6 @@ object Displays extends Controller {
       }
 
     )
-
     }
   }
 

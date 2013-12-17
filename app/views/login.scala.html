@@ -1,0 +1,53 @@
+
+@import helper._
+
+<!DOCTYPE html>
+<html ng-app="ladda">
+<head>
+    <script src="http://code.angularjs.org/1.2.5/angular.min.js"></script>
+    <script src="@routes.Assets.at("javascripts/login.js")"></script>
+    <link href="@routes.Assets.at("stylesheets/bootstrap.css")" rel="stylesheet">
+    <link rel="stylesheet" href="@routes.Assets.at("stylesheets/ladda-themeless.min.css")">
+    <script src="@routes.Assets.at("javascripts/spin.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/ladda.min.js")"></script>
+     <script src="@routes.Assets.at("javascripts/ladda-angular-directive.js")"></script>
+    <style type="text/css">
+        body{padding-top:20px;}
+    </style>
+    <title></title>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please sign in</h3>
+                </div>
+                <div class="panel-body" ng-controller="LoginController">
+                    <form ng-submit="processForm()">
+                        <fieldset>
+                            <!--<div id="messages" ng-show="message">{{ message }}</div>-->
+                            <div class="form-group">
+                                <input class="form-control" placeholder="SSH Server Address" name="IP" type="text" ng-model="formData.ip_address">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Login" name="login" type="text" value="" ng-model="formData.login">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="" ng-model="formData.password">
+                            </div>
+                                  <button id="asdg" type="submit" class="btn btn-lgn btn-block btn-primary ladda-button" ladda data-style="expand-left">
+                                     <span class="ladda-label">Submit</span>
+                                  </button>
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
